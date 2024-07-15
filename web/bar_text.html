@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Nunito', sans-serif;
+      border-radius: 25px;
+    }
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .overlay {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      font-size: 24px;
+    }
+    .overlay input {
+      width: 90%;
+      margin: 5%;
+      height: 90%;
+      border: none;
+      outline: none;
+      font-size: 20px;
+      font-weight: 500;
+      color: #222222;
+      background-color: transparent;
+    }
+    .overlay input::placeholder {
+      color: #353535;
+    }
+  </style>
+
+  
+  <script>
+    // Function to simulate typewriter effect
+    function typeWriter(text) {
+      var outputElement = document.getElementById('output');
+      var speed = 50; // Adjust speed of typing
+      var i = 0;
+
+      // Clear any existing text
+      outputElement.textContent = '';
+
+      // Function to add each character with delay
+      function type() {
+        if (i < text.length) {
+          outputElement.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+
+      // Start typing effect
+      type();
+    }
+
+    // Example usage
+    window.onload = function() {
+      var textParam = getUrlParameter('text');
+      if (textParam) {
+        typeWriter(textParam);
+      }
+    };
+
+    // Function to get URL parameters by name
+    function getUrlParameter(name) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(window.location.href);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+  </script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 18 -7" result="goo" />
+      </filter>
+      <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#f8ff9c" />
+        <stop offset="100%" stop-color="#fcffd1" />
+      </radialGradient>
+      <radialGradient id="grad2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#f8ff9c" />
+        <stop offset="100%" stop-color="#fcffd1" />
+      </radialGradient>
+      <radialGradient id="grad3" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#fbc2eb" />
+        <stop offset="100%" stop-color="#a6c1ee" />
+      </radialGradient>
+      <radialGradient id="grad4" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#ff91fa" />
+        <stop offset="100%" stop-color="#a6c1ee" />
+      </radialGradient>
+      <radialGradient id="grad5" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#a1c4fd" />
+        <stop offset="100%" stop-color="#c2e9fb" />
+      </radialGradient>
+    </defs>
+    <g filter="url(#goo)">
+      <rect width="120%" height="120%" x="-10%" y="-10%" fill="url(#grad1)" />
+    </g>
+    <g filter="url(#goo)">
+      <circle cx="10" cy="10" r="60" fill="url(#grad1)">
+        <animate attributeName="cx" values="-10;110;-10" dur="20s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="-10;110;-10" dur="23s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="90" cy="90" r="65" fill="url(#grad2)">
+        <animate attributeName="cx" values="110;-10;110" dur="21s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="110;-10;110" dur="24s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="50" cy="50" r="70" fill="url(#grad3)">
+        <animate attributeName="cx" values="50;-20;120;50" dur="22s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="50;120;-20;50" dur="25s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="20" cy="80" r="68" fill="url(#grad4)">
+        <animate attributeName="cx" values="-20;120;-20" dur="23s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="120;-20;120" dur="26s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="80" cy="20" r="62" fill="url(#grad5)">
+        <animate attributeName="cx" values="120;-20;120" dur="24s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="-20;120;-20" dur="27s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </svg> 
+  <div class="overlay">
+    <span id="output"></span>
+  </div>
+
+</body>
+</html>
